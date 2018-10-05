@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="xml2json.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+</head>
+<body ng-app="Addressbook" ng-controller="controller">
+    <div ng-app="Addressbook" ng-controller="controller">
+        <ul>
+            <li ng-repeat="det in details"><a href="http://www.binwindows.net/documentation/download/ab.xml"> {{ book }}</a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var app = angular.module('Addressbook', []);
+        app.controller('controller', function ($scope, $http) {
+            $http.get("http://www.bindows.net/documentation/download/ab.xml",
+                {
+                    transformResponse: function (cnv) {
+                        var x2js = new X2JS();
+                        var aftCnv = "http://www.bindows.net/documentation/download/ab.xml"(cnv);
+                        return aftCnv;
+                    }
+                })
+                .success(function (response) {
+                    console.log(response);
+                });
+        });
+    </script>
+
+    
+
+    <table id="AddressTable" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("ID")
+                </th>
+                <th>
+                    @Html.DisplayName("company")
+                </th>
+                <th>
+                    @Html.DisplayName("name")
+                </th>
+                <th>
+                    @Html.DisplayName("title")
+                </th>
+                <th>
+                    @Html.DisplayName("address")
+                </th>
+                <th>
+                    @Html.DisplayName("city")
+                </th>
+                <th>
+                    @Html.DisplayName("email")
+                </th>
+                <th>
+                    @Html.DisplayName("zip")
+                </th>
+                <th>
+                    @Html.DisplayName("country")
+                </th>
+                <th>
+                    @Html.DisplayName("phone")
+                </th>
+                <th>
+                    @Html.DisplayName("fax")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <th>
+            {{scope}}
+        </th>
+        <th>
+            {{scope.company}}
+        </th>
+        <th>
+            {{scope.name}}
+        </th>
+        <th>
+            {{scope.title}}
+        </th>
+        <th>
+            {{scope.address}}
+        </th>
+        <th>
+            {{scope.city}}
+        </th>
+        <th>
+            {{scope.email}}
+        </th>
+        <th>
+            {{scope.zip}}
+        </th>
+        <th>
+            {{scope.country}}
+        </th>
+        <th>
+            {{scope.phone}}
+        </th>
+        <th>
+            {{scope.fax}}
+        </th>
+        <th></th>
+        </tr>
+        </tbody>
+        </table>
+</body>
+</html>
